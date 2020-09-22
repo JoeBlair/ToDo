@@ -1,29 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Django Dummy</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-	{% if request.user.is_authenticated %}
-		Hello {{request.user.username}}
+{% block content %}
+<div class="text-center">
+	<p>
+		{% if request.user.is_authenticated %}
+			Hello {{request.user.username}}
 
-	{% else %}
-		Hello stranger!
-	{% endif %}
+		{% else %}
+			Hello stranger!
+		{% endif %}
+	</p>
 
-	<a href="/create">Create a To Do</a>
+	<a href="/create" class="btn btn-primary">Create a To Do</a>
 
-
-	<ul>
+</div>
+	<div class="col-4 offset-4">
 
 	{% for todo in todo_list %}
 
-		<li><a href="/{{todo.id}}">{{todo.name}}</a>, is due: {{todo.due_date}}</li>
+		<div class="card mt-3">
+			<div class="card-header">
+				<a href="/{{todo.id}}"><h4>{{todo.name}}</h4></a>
+				
+			</div>
+			<div class="card-body">		
+				<p>Due: {{todo.due_date}}</p>
+		
+			</div>
+		</div>
 
 	{% endfor %}
 
-	</ul>
+	</div>
 
-</body>
-</html>
+{% endblock content %}

@@ -41,9 +41,9 @@ def todo_create(request):
 
 
 def todo_update(request, id):
-	
-	form = ToDoForm(request.POST or None)
 	todo = ToDo.objects.get(id=id)
+	
+	form = ToDoForm(request.POST or None, instance=todo)
 
 	if form.is_valid():
 
@@ -53,3 +53,11 @@ def todo_update(request, id):
 	context = {'form': form.as_p}
 	return render(request, 'todo/todo_update.html', context)
 
+
+def todo_delete(request, id):
+
+	todo = ToDo.objects.get(id=id)
+
+	todo.delete()
+
+	return(redirect('/'))
