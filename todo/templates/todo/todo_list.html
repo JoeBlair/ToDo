@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Django Dummy</title>
+</head>
+<body>
+
+	{% if request.user.is_authenticated %}
+		Hello {{request.user.username}}
+
+	{% else %}
+		Hello stranger!
+	{% endif %}
+
+	<a href="/create">Create a To Do</a>
+
+
+	<ul>
+
+	{% for todo in todo_list %}
+
+		<li><a href="/{{todo.id}}">{{todo.name}}</a>, is due: {{todo.due_date}}</li>
+
+	{% endfor %}
+
+	</ul>
+
+</body>
+</html>
